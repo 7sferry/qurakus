@@ -1,0 +1,32 @@
+quarkus:
+  application:
+    name: user-web-service
+  analytics:
+    disabled: true
+  http:
+    port: 8004
+  datasource:
+    db-kind: postgresql
+    username: postgres
+    password: '12345'
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/so_clean_qurakus
+  hibernate-orm:
+    physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    schema-management:
+      strategy: update
+    log:
+      sql: true
+  smallrye-openapi:
+    info-title: user-web-service
+    info-version: 1.0.0
+    info-description: User registration and user detail, built with Clean Architecture on Quarkus and Hibernate ORM with Panache.
+    store-schema-directory: target/openapi
+  log:
+    file:
+      enabled: true
+      path: logs/user-web-service.log
+      rotation:
+        max-file-size: 10M
+        max-backup-index: 30
+        file-suffix: .yyyy-MM-dd.gz
