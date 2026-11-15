@@ -6,9 +6,9 @@ import com.ferry.user.core.user.detail.UserDetailUseCase;
 import com.ferry.user.core.user.registration.DefaultUserRegistrationUseCase;
 import com.ferry.user.core.user.registration.UserRegistrationGateway;
 import com.ferry.user.core.user.registration.UserRegistrationUseCase;
-import com.ferry.user.gateway.user.JpaUserDetailGateway;
-import com.ferry.user.gateway.user.JpaUserRegistrationGateway;
-import com.ferry.user.gateway.user.repository.UserJpaRepository;
+import com.ferry.user.gateway.user.PanacheUserDetailGateway;
+import com.ferry.user.gateway.user.PanacheUserRegistrationGateway;
+import com.ferry.user.gateway.user.repository.UserPanacheRepository;
 import com.ferry.utils.generator.IdGenerator;
 import com.ferry.utils.generator.UlidGenerator;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -30,8 +30,8 @@ public class UserWebConfig{
 
 	@Produces
 	@ApplicationScoped
-	UserRegistrationGateway userRegistrationGateway(UserJpaRepository userJpaRepository, IdGenerator idGenerator){
-		return new JpaUserRegistrationGateway(userJpaRepository, idGenerator);
+	UserRegistrationGateway userRegistrationGateway(UserPanacheRepository userPanacheRepository, IdGenerator idGenerator){
+		return new PanacheUserRegistrationGateway(userPanacheRepository, idGenerator);
 	}
 
 	@Produces
@@ -42,8 +42,8 @@ public class UserWebConfig{
 
 	@Produces
 	@ApplicationScoped
-	UserDetailGateway userDetailGateway(UserJpaRepository userJpaRepository){
-		return new JpaUserDetailGateway(userJpaRepository);
+	UserDetailGateway userDetailGateway(UserPanacheRepository userPanacheRepository){
+		return new PanacheUserDetailGateway(userPanacheRepository);
 	}
 
 	@Produces

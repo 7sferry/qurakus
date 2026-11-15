@@ -4,7 +4,7 @@ import com.ferry.user.core.user.registration.UserRegistrationGateway;
 import com.ferry.user.domain.user.User;
 import com.ferry.user.domain.user.Username;
 import com.ferry.user.gateway.user.entity.UserJpa;
-import com.ferry.user.gateway.user.repository.UserJpaRepository;
+import com.ferry.user.gateway.user.repository.UserPanacheRepository;
 import com.ferry.utils.generator.IdGenerator;
 import lombok.RequiredArgsConstructor;
 
@@ -14,21 +14,21 @@ import lombok.RequiredArgsConstructor;
  ************************/
 
 @RequiredArgsConstructor
-public class JpaUserRegistrationGateway implements UserRegistrationGateway{
-	private final UserJpaRepository userJpaRepository;
+public class PanacheUserRegistrationGateway implements UserRegistrationGateway{
+	private final UserPanacheRepository userPanacheRepository;
 	private final IdGenerator idGenerator;
 
 	@Override
 	public User save(User register){
 		String id = idGenerator.generateId();
 		UserJpa entity = UserJpa.construct(id, register.ownedBy(id));
-		userJpaRepository.persistAndFlush(entity);
+		userPanacheRepository.persistAndFlush(entity);
 		return UserJpa.construct(entity);
 	}
 
 	@Override
 	public boolean existsByUsername(Username username){
-		return userJpaRepository.existsByUsername(username.value());
+		return userPanacheRepository.existsByUsername(username.value());
 	}
 
 }

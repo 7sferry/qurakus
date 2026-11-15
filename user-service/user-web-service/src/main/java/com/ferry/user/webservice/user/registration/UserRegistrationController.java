@@ -52,14 +52,11 @@ public class UserRegistrationController{
 			content = @Content(mediaType = ProblemDetail.MEDIA_TYPE,
 					schema = @Schema(implementation = ProblemDetail.class)))
 	public RestResponse<UserRegistrationRestResponse> register(
-			@RequestBody(required = true, content = @Content(mediaType = MediaType.APPLICATION_JSON,
+			@RequestBody(content = @Content(mediaType = MediaType.APPLICATION_JSON,
 					schema = @Schema(implementation = UserRegistrationRequest.class),
 					examples = @ExampleObject(name = "budi",
 							value = "{\"username\":\"budi_santoso\",\"birthDate\":\"1997-05-09\"}")))
 			UserRegistrationRequest request){
-		if(request == null){
-			throw new BadRequestException("Request body is required");
-		}
 		WebUserRegistrationPresenter presenter = new WebUserRegistrationPresenter();
 		userRegistrationUseCase.execute(request, presenter);
 		return presenter.getRestResponse();

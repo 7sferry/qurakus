@@ -2,9 +2,9 @@ package com.ferry.user.gateway.user.repository;
 
 import com.ferry.user.gateway.user.entity.UserJpa;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
-import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.util.Map;
 import java.util.Optional;
 
 /************************
@@ -13,15 +13,15 @@ import java.util.Optional;
  ************************/
 
 @ApplicationScoped
-public class UserJpaRepository implements PanacheRepositoryBase<UserJpa, String>{
+public class UserPanacheRepository implements PanacheRepositoryBase<UserJpa, String>{
 
 	public Optional<UserJpa> findByUsernameAndDeletedIsFalse(String username){
-		return find("username = :username and deleted is false", Parameters.with("username", username))
+		return find("username = :username and deleted is false", Map.of("username", username))
 				.firstResultOptional();
 	}
 
 	public boolean existsByUsername(String username){
-		return count("username = :username", Parameters.with("username", username)) > 0;
+		return count("username = :username", Map.of("username", username)) > 0;
 	}
 
 }

@@ -177,7 +177,7 @@ Controllers are thin: build a `WebXxxPresenter`, call `useCase.execute(request, 
 ### Wiring
 
 - Use cases and gateways are plain classes with no CDI annotations. They are produced in `UserWebConfig` with `@Produces @ApplicationScoped` methods (gateway bean, then use case bean). This is the Quarkus counterpart of qlaundry's `@Bean` methods. Register every new use case there.
-- The Panache repository (`UserJpaRepository`, `PanacheRepositoryBase<UserJpa, String>`) is the only CDI bean in `user-gateway`. `user-gateway` builds a Jandex index (`jandex-maven-plugin`) so Quarkus finds the entity and the repository inside the module jar. A new module with entities or beans needs the same plugin.
+- The Panache repository (`UserPanacheRepository`, `PanacheRepositoryBase<UserJpa, String>`) is the only CDI bean in `user-gateway`. `user-gateway` builds a Jandex index (`jandex-maven-plugin`) so Quarkus finds the entity and the repository inside the module jar. A new module with entities or beans needs the same plugin.
 - Controllers use `@Transactional` (Jakarta). Quarkus has no per-method isolation level, so the Postgres default (read committed) applies.
 
 ### Domain and validation

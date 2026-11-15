@@ -4,7 +4,7 @@ import com.ferry.user.core.user.detail.UserDetailGateway;
 import com.ferry.user.domain.user.User;
 import com.ferry.user.domain.user.Username;
 import com.ferry.user.gateway.user.entity.UserJpa;
-import com.ferry.user.gateway.user.repository.UserJpaRepository;
+import com.ferry.user.gateway.user.repository.UserPanacheRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
@@ -15,12 +15,12 @@ import java.util.Optional;
  ************************/
 
 @RequiredArgsConstructor
-public class JpaUserDetailGateway implements UserDetailGateway{
-	private final UserJpaRepository userJpaRepository;
+public class PanacheUserDetailGateway implements UserDetailGateway{
+	private final UserPanacheRepository userPanacheRepository;
 
 	@Override
 	public Optional<User> findByUsername(Username username){
-		return userJpaRepository.findByUsernameAndDeletedIsFalse(username.value())
+		return userPanacheRepository.findByUsernameAndDeletedIsFalse(username.value())
 				.map(UserJpa::construct);
 	}
 

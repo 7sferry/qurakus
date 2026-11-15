@@ -9,11 +9,11 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Schema(description = "RFC 7807 problem detail")
 public record ProblemDetail(
-	@Schema(example = "about:blank") String type,
-	@Schema(example = "Bad Request") String title,
-	@Schema(example = "400") int status,
-	@Schema(example = "Username must be at least 5 characters long") String detail,
-	@Schema(example = "/public/user/registration") String instance){
+	@Schema(examples = "about:blank") String type,
+	@Schema(examples = "Bad Request") String title,
+	@Schema(examples = "400") int status,
+	@Schema(examples = "Username must be at least 5 characters long") String detail,
+	@Schema(examples = "/public/user/registration") String instance){
 	public static final String MEDIA_TYPE = "application/problem+json";
 	private static final String DEFAULT_TYPE = "about:blank";
 
